@@ -1,25 +1,3 @@
-const glyphs = {
-  S:['11111','10000','10000','11111','00001','00001','11111'],
-  C:['01111','10000','10000','10000','10000','10000','01111'],
-  E:['11111','10000','10000','11110','10000','10000','11111'],
-  N:['10001','11001','11001','10101','10011','10011','10001'],
-  A:['01110','10001','10001','11111','10001','10001','10001'],
-  R:['11110','10001','10001','11110','10100','10010','10001'],
-  I:['11111','00100','00100','00100','00100','00100','11111'],
-  O:['01110','10001','10001','10001','10001','10001','01110']
-};
-const svgNS = 'http://www.w3.org/2000/svg';
-const svg = document.createElementNS(svgNS,'svg');
-svg.setAttribute('viewBox','0 0 470 70');
-for (const [letterIndex,letter] of [...'SCENARIO'].entries()) {
-  glyphs[letter].forEach((row,y) => [...row].forEach((pixel,x) => {
-    if(pixel !== '1') return;
-    const rect = document.createElementNS(svgNS,'rect');
-    Object.entries({x:letterIndex*60+x*10,y:y*10,width:9.65,height:9.65,fill:['#ffa17f','#ff9a76','#ff946f','#f58b66','#ee805b','#e97753','#dd704e'][y]}).forEach(([key,value])=>rect.setAttribute(key,String(value)));
-    svg.append(rect);
-  }));
-}
-document.getElementById('pixel-title').append(svg);
 const dialog = document.getElementById('apply-dialog');
 document.querySelectorAll('[data-apply]').forEach(button => button.addEventListener('click',()=>dialog.showModal()));
 document.querySelectorAll('.dialog-close,.dialog-confirm').forEach(button => button.addEventListener('click',()=>dialog.close()));
